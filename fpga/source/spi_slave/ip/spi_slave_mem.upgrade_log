@@ -1,0 +1,16 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4.2 (lin64) Build 1494164 Fri Feb 26 04:18:54 MST 2016
+| Date         : Tue Sep 13 18:10:31 2016
+| Host         : pedro-ubuntu-crucial running 64-bit Ubuntu 16.04.1 LTS
+| Command      : upgrade_ip
+| Device       : xc7vx485tffg1761-2
+--------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'spi_slave_mem'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of spi_slave_mem (xilinx.com:ip:dist_mem_gen:8.0) from (Rev. 10) to (Rev. 9)
+
