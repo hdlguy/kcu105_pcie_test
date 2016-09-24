@@ -1,7 +1,7 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
--- Date        : Sat Sep 17 07:32:12 2016
+-- Date        : Sun Sep 18 07:59:48 2016
 -- Host        : pedro-ubuntu-crucial running 64-bit Ubuntu 16.04.1 LTS
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/pedro/github/kcu105_pcie_test/fpga/source/spi_slave/ip/spi_slave_mem_sim_netlist.vhdl

@@ -12,24 +12,17 @@ synth_ip [get_ips $list3]
 
 
 synth_design -top top
+
 write_checkpoint -force ./results/post_synth.dcp
-#report_timing_summary -file ./results/post_synth_timing_summary.rpt
-#report_utilization -file ./results/post_synth_util.rpt
-#reportCriticalPaths post_synth_critpath_report.csv
 
 # add ila logic analyzer.
 #source add_ila.tcl
 
 opt_design
-#reportCriticalPaths post_opt_critpath_report.csv
 
 place_design
-#report_clock_utilization -file ./results/clock_util.rpt
 
 phys_opt_design
-#write_checkpoint -force ./results/post_place.dcp
-#report_utilization -file ./results/post_place_util.rpt
-#report_timing_summary -file ./results/post_place_timing_summary.rpt
 
 route_design
 
