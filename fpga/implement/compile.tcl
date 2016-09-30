@@ -40,12 +40,21 @@ report_io                   -file ./results/post_imp_io.rpt
 
 xilinx::ultrafast::report_io_reg -verbose -file ./results/io_regs.rpt
 
-set_property CFGBVS VCCO [current_design]
-set_property CONFIG_VOLTAGE 2.5 [current_design]
-set_property BITSTREAM.CONFIG.CONFIGRATE 6 [current_design]
-write_bitstream -verbose -force ./results/top.bit
+#set_property SPI_BUSWIDTH 8 [current_design]
+#set_property CFGBVS VCCO [current_design]
+#set_property CONFIG_VOLTAGE 2.5 [current_design]
+#set_property BITSTREAM.CONFIG.CONFIGRATE 6 [current_design]
+#write_bitstream -verbose -force ./results/top.bit
+
+#close_project
+
+#write_cfgmem -force -format MCS -size 128 -interface BPIx16 -loadbit "up 0x0 ./results/top.bit" -verbose ./results/top.mcs
+
+
+set_property BITSTREAM.CONFIG.CONFIGRATE 50 [current_design]
+set_property BITSTREAM.Config.SPI_BUSWIDTH 4 [current_design]
+write_bitstream -verbose -force $outputDir/top.bit
 
 close_project
 
-write_cfgmem -force -format MCS -size 128 -interface BPIx16 -loadbit "up 0x0 ./results/top.bit" -verbose ./results/top.mcs
-
+write_cfgmem -force -format MCS -size 256 -interface SPIx4 -loadbit "up 0x0 ./results/top.bit" -verbose ./results/top.mcs
