@@ -1,3 +1,11 @@
+2016.4:
+ * Version 8.0 (Rev. 11)
+ * No changes
+
+2016.3:
+ * Version 8.0 (Rev. 11)
+ * Enable support for future devices
+
 2016.2:
  * Version 8.0 (Rev. 10)
  * No changes

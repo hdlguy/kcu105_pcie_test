@@ -2,10 +2,10 @@ module top (
     input  logic pcie_refclk_n,
     input  logic pcie_refclk_p,
     input  logic pcie_perst_n,
-    input  logic [3:0] pcie_7x_mgt_rxn,
-    input  logic [3:0] pcie_7x_mgt_rxp,
-    output logic [3:0] pcie_7x_mgt_txn,
-    output logic [3:0] pcie_7x_mgt_txp,
+    input  logic [7:0] pcie_7x_mgt_rxn,
+    input  logic [7:0] pcie_7x_mgt_rxp,
+    output logic [7:0] pcie_7x_mgt_txn,
+    output logic [7:0] pcie_7x_mgt_txp,
     //
     output logic [7:0] led);
 

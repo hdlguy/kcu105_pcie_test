@@ -20,7 +20,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2016.2
+set scripts_vivado_version 2016.4
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -210,14 +210,22 @@ CONFIG.NUM_MI {3} \
  ] $axi_interconnect_0
 
   # Create instance: axi_pcie3_0, and set properties
-  set axi_pcie3_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_pcie3:2.1 axi_pcie3_0 ]
+  set axi_pcie3_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_pcie3:3.0 axi_pcie3_0 ]
   set_property -dict [ list \
-CONFIG.axi_data_width {128_bit} \
+CONFIG.axi_aclk_loopback {true} \
+CONFIG.axi_data_width {256_bit} \
 CONFIG.axisten_freq {125} \
-CONFIG.pf0_device_id {8024} \
+CONFIG.mcap_enablement {None} \
+CONFIG.mode_selection {Advanced} \
+CONFIG.pf0_device_id {8028} \
 CONFIG.pl_link_cap_max_link_speed {5.0_GT/s} \
-CONFIG.pl_link_cap_max_link_width {X4} \
+CONFIG.pl_link_cap_max_link_width {X8} \
 CONFIG.plltype {QPLL1} \
+ ] $axi_pcie3_0
+
+  # Need to retain value_src of defaults
+  set_property -dict [ list \
+CONFIG.axi_aclk_loopback.VALUE_SRC {DEFAULT} \
  ] $axi_pcie3_0
 
   # Create instance: axi_quad_spi_0, and set properties
@@ -322,12 +330,12 @@ CONFIG.CONST_WIDTH {5} \
 
   # Perform GUI Layout
   regenerate_bd_layout -layout_string {
-   guistr: "# # String gsaved with Nlview 6.5.12  2016-01-29 bk=1.3547 VDI=39 GEI=35 GUI=JA:1.6
+   guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
 #  -string -flagsOSRD
 preplace port pcie_perst_n -pg 1 -y 760 -defaultsOSRD
 preplace port spi_sck -pg 1 -y 820 -defaultsOSRD
 preplace port spi_miso -pg 1 -y 620 -defaultsOSRD
-preplace port pcie_refclk -pg 1 -y 820 -defaultsOSRD
+preplace port pcie_refclk -pg 1 -y 900 -defaultsOSRD
 preplace port spi_mosi -pg 1 -y 780 -defaultsOSRD
 preplace port axi_clk -pg 1 -y 630 -defaultsOSRD
 preplace port pcie_7x_mgt -pg 1 -y 710 -defaultsOSRD
@@ -371,30 +379,30 @@ preplace inst axi_pcie3_0 -pg 1 -lvl 3 -y 790 -defaultsOSRD
 preplace inst blk_mem_gen_0 -pg 1 -lvl 6 -y 560 -defaultsOSRD
 preplace inst axi_interconnect_0 -pg 1 -lvl 4 -y 540 -defaultsOSRD
 preplace inst axi_bram_ctrl_0 -pg 1 -lvl 5 -y 560 -defaultsOSRD
-preplace inst util_ds_buf_0 -pg 1 -lvl 1 -y 820 -defaultsOSRD
+preplace inst util_ds_buf_0 -pg 1 -lvl 1 -y 900 -defaultsOSRD
 preplace inst axi_quad_spi_0 -pg 1 -lvl 5 -y 810 -defaultsOSRD
 preplace netloc slv_read6_1 1 0 5 NJ 190 NJ 190 NJ 190 NJ 190 NJ
 preplace netloc slv_read5_1 1 0 5 NJ 170 NJ 170 NJ 170 NJ 170 NJ
 preplace netloc slv_read4_1 1 0 5 NJ 150 NJ 150 NJ 150 NJ 150 NJ
 preplace netloc slv_read11_1 1 0 5 NJ 290 NJ 290 NJ 290 NJ 290 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg8 1 5 2 NJ 240 NJ
-preplace netloc io1_i_1 1 0 6 NJ 620 NJ 620 NJ 620 NJ 710 NJ 710 1540
+preplace netloc io1_i_1 1 0 6 NJ 620 NJ 620 NJ 620 960J 710 NJ 710 1580
 preplace netloc regfilex16_v1_0_0_slv_reg9 1 5 2 NJ 260 NJ
-preplace netloc axi_pcie_0_axi_aclk_out 1 1 6 310 640 530 630 920 380 1240 630 NJ 630 NJ
+preplace netloc axi_pcie_0_axi_aclk_out 1 1 6 310 950 540 950 970 950 1280 950 NJ 950 1810J
 preplace netloc axi_quad_spi_0_ss_o 1 5 2 NJ 840 NJ
 preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 5 1 NJ
 preplace netloc slv_read2_1 1 0 5 NJ 110 NJ 110 NJ 110 NJ 110 NJ
 preplace netloc slv_read15_1 1 0 5 NJ 370 NJ 370 NJ 370 NJ 370 NJ
 preplace netloc CLK_IN_D_1 1 0 1 NJ
-preplace netloc axi_interconnect_0_M02_AXI 1 4 1 1230
+preplace netloc axi_interconnect_0_M02_AXI 1 4 1 1260
 preplace netloc slv_read8_1 1 0 5 NJ 230 NJ 230 NJ 230 NJ 230 NJ
-preplace netloc axi_pcie3_0_M_AXI 1 3 1 930
+preplace netloc axi_pcie3_0_M_AXI 1 3 1 950
 preplace netloc regfilex16_v1_0_0_slv_reg0 1 5 2 NJ 80 NJ
-preplace netloc util_ds_buf_0_IBUF_OUT 1 1 2 310 790 NJ
+preplace netloc util_ds_buf_0_IBUF_OUT 1 1 2 N 890 520J
 preplace netloc regfilex16_v1_0_0_slv_reg10 1 5 2 NJ 280 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg1 1 5 2 NJ 100 NJ
-preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 4 300 600 NJ 600 940 720 1250
-preplace netloc fit_timer_0_Interrupt 1 2 1 520
+preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 4 300 480 NJ 480 940 340 1270
+preplace netloc fit_timer_0_Interrupt 1 2 1 530
 preplace netloc axi_quad_spi_0_io0_o 1 5 2 NJ 780 NJ
 preplace netloc xlconstant_0_dout 1 2 1 NJ
 preplace netloc slv_read3_1 1 0 5 NJ 130 NJ 130 NJ 130 NJ 130 NJ
@@ -403,11 +411,11 @@ preplace netloc slv_read0_1 1 0 5 NJ 70 NJ 70 NJ 70 NJ 70 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg11 1 5 2 NJ 300 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg2 1 5 2 NJ 120 NJ
 preplace netloc axi_quad_spi_0_sck_o 1 5 2 NJ 820 NJ
-preplace netloc axi_pcie3_0_pcie_7x_mgt 1 3 4 NJ 700 NJ 700 NJ 700 NJ
+preplace netloc axi_pcie3_0_pcie_7x_mgt 1 3 4 NJ 700 NJ 700 NJ 700 1800J
 preplace netloc slv_read14_1 1 0 5 NJ 350 NJ 350 NJ 350 NJ 350 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg12 1 5 2 NJ 320 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg3 1 5 2 NJ 140 NJ
-preplace netloc axi_interconnect_0_M00_AXI 1 4 1 1230
+preplace netloc axi_interconnect_0_M00_AXI 1 4 1 1260
 preplace netloc regfilex16_v1_0_0_slv_reg13 1 5 2 NJ 340 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg4 1 5 2 NJ 160 NJ
 preplace netloc pcie_perst_n_1 1 0 3 NJ 760 NJ 760 NJ
@@ -418,12 +426,12 @@ preplace netloc regfilex16_v1_0_0_slv_reg5 1 5 2 NJ 180 NJ
 preplace netloc slv_read9_1 1 0 5 NJ 250 NJ 250 NJ 250 NJ 250 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg15 1 5 2 NJ 380 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg6 1 5 2 NJ 200 NJ
-preplace netloc util_ds_buf_0_IBUF_DS_ODIV2 1 1 2 300 890 NJ
+preplace netloc util_ds_buf_0_IBUF_DS_ODIV2 1 1 2 N 910 550J
 preplace netloc slv_read7_1 1 0 5 NJ 210 NJ 210 NJ 210 NJ 210 NJ
 preplace netloc slv_read1_1 1 0 5 NJ 90 NJ 90 NJ 90 NJ 90 NJ
 preplace netloc slv_read12_1 1 0 5 NJ 310 NJ 310 NJ 310 NJ 310 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg7 1 5 2 NJ 220 NJ
-levelinfo -pg 1 0 160 410 720 1090 1400 1650 1780 -top 0 -bot 950
+levelinfo -pg 1 0 160 420 750 1120 1440 1690 1830 -top 0 -bot 970
 ",
 }
 

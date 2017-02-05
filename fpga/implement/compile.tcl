@@ -50,6 +50,8 @@ xilinx::ultrafast::report_io_reg -verbose -file ./results/io_regs.rpt
 
 #write_cfgmem -force -format MCS -size 128 -interface BPIx16 -loadbit "up 0x0 ./results/top.bit" -verbose ./results/top.mcs
 
+set_property CFGBVS GND [current_design]
+set_property CONFIG_VOLTAGE 1.8 [current_design]
 
 set_property BITSTREAM.CONFIG.CONFIGRATE 50 [current_design]
 set_property BITSTREAM.Config.SPI_BUSWIDTH 4 [current_design]
