@@ -215,8 +215,11 @@ CONFIG.NUM_MI {3} \
 CONFIG.axi_aclk_loopback {true} \
 CONFIG.axi_data_width {256_bit} \
 CONFIG.axisten_freq {125} \
+CONFIG.c_s_axi_supports_narrow_burst {true} \
 CONFIG.mcap_enablement {None} \
 CONFIG.mode_selection {Advanced} \
+CONFIG.pf0_bar0_scale {Megabytes} \
+CONFIG.pf0_bar0_size {1} \
 CONFIG.pf0_device_id {8028} \
 CONFIG.pl_link_cap_max_link_speed {5.0_GT/s} \
 CONFIG.pl_link_cap_max_link_width {X8} \
@@ -324,9 +327,9 @@ CONFIG.CONST_WIDTH {5} \
   connect_bd_net -net xlconstant_0_dout [get_bd_pins axi_pcie3_0/msi_vector_num] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
-  create_bd_addr_seg -range 0x00001000 -offset 0xC0000000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs axi_bram_ctrl_0/S_AXI/Mem0] SEG_axi_bram_ctrl_0_Mem0
-  create_bd_addr_seg -range 0x00010000 -offset 0x44A00000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs axi_quad_spi_0/AXI_LITE/Reg] SEG_axi_quad_spi_0_Reg
-  create_bd_addr_seg -range 0x00010000 -offset 0x44A10000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs regfilex16_v1_0_0/s00_axi/reg0] SEG_regfilex16_v1_0_0_reg0
+  create_bd_addr_seg -range 0x00001000 -offset 0x00030000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs axi_bram_ctrl_0/S_AXI/Mem0] SEG_axi_bram_ctrl_0_Mem0
+  create_bd_addr_seg -range 0x00010000 -offset 0x00020000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs axi_quad_spi_0/AXI_LITE/Reg] SEG_axi_quad_spi_0_Reg
+  create_bd_addr_seg -range 0x00010000 -offset 0x00010000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs regfilex16_v1_0_0/s00_axi/reg0] SEG_regfilex16_v1_0_0_reg0
 
   # Perform GUI Layout
   regenerate_bd_layout -layout_string {
