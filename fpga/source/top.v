@@ -7,7 +7,8 @@ module top (
     output logic [7:0] pcie_7x_mgt_txn,
     output logic [7:0] pcie_7x_mgt_txp,
     //
-    output logic [7:0] led);
+    output logic [7:0] led
+);
 
     logic [31:0] slv_read[16];
     logic [31:0] slv_reg[16];
@@ -21,7 +22,7 @@ module top (
 
     // for now wrap the regs back to the read ports.
     assign slv_read[0] = 32'hDEADBEEF;
-    assign slv_read[1] = 32'hCAFEBABE;
+    assign slv_read[1] = 32'h76543210;
     assign slv_read[15:2] = slv_reg[15:2];
     assign led = slv_reg[7][7:0];
 
