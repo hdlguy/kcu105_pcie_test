@@ -1,4 +1,5 @@
 # This script sets up a Vivado project with all ip references resolved.
+close_project -quiet
 # tclapp::install ultrafast
 file delete -force proj.xpr *.os *.jou *.log implement/* proj.srcs proj.cache proj.runs proj.sim proj.hw proj.ip_user_files ip
 #
@@ -26,7 +27,6 @@ update_ip_catalog -add_ip ../source/regfilex16/user.org_user_regfilex16_v1_0_1.0
 read_ip ../source/spi_slave/ip/spi_slave_mem.xci
 upgrade_ip -quiet [get_ips *]
 generate_target {all} [get_ips *]
-synth_ip -force [get_ips *]
 
 # Recreate the Block Diagram of the processor system.
 source ../source/system.tcl

@@ -1,4 +1,5 @@
 # Script to compile the FPGA with zynq processor system all the way to bit file.
+close_project -quiet
 set outputDir ./results
 file mkdir ./results
 open_project proj.xpr

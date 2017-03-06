@@ -6,7 +6,7 @@
 <Project Version="7" Minor="17" Path="/home/pedro/github/kcu105_pcie_test/fpga/implement/proj.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="a932744a25dd4b6b9a9c5d24c402a525"/>
+    <Option Name="Id" Val="6560ba9b680b4daeb446a8957d4ba190"/>
     <Option Name="Part" Val="xcku040-ffva1156-2-e"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
@@ -37,13 +37,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="1"/>
-    <Option Name="WTModelSimExportSim" Val="1"/>
-    <Option Name="WTQuestaExportSim" Val="1"/>
-    <Option Name="WTIesExportSim" Val="1"/>
-    <Option Name="WTVcsExportSim" Val="1"/>
-    <Option Name="WTRivieraExportSim" Val="1"/>
-    <Option Name="WTActivehdlExportSim" Val="1"/>
+    <Option Name="WTXSimExportSim" Val="0"/>
+    <Option Name="WTModelSimExportSim" Val="0"/>
+    <Option Name="WTQuestaExportSim" Val="0"/>
+    <Option Name="WTIesExportSim" Val="0"/>
+    <Option Name="WTVcsExportSim" Val="0"/>
+    <Option Name="WTRivieraExportSim" Val="0"/>
+    <Option Name="WTActivehdlExportSim" Val="0"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -53,32 +53,39 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PPRDIR/../source/spi_slave/ip/spi_slave_mem.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/bd/system/system.bd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_quad_spi_0_0/system_axi_quad_spi_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="system_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_pc_0/system_auto_pc_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_util_ds_buf_0_0/system_util_ds_buf_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_fit_timer_0_0/system_fit_timer_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_bram_ctrl_0_0/system_axi_bram_ctrl_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="hdl/system.v"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_interconnect_0_0/system_axi_interconnect_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_0/system_xbar_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_pc_1/system_auto_pc_1.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_ds_0/system_auto_ds_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_ds_1/system_auto_ds_1.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_ds_2/system_auto_ds_2.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_regfilex16_v1_0_0_0/system_regfilex16_v1_0_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xlconstant_0_0/system_xlconstant_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_pcie3_0_0/system_axi_pcie3_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_blk_mem_gen_0_0/system_blk_mem_gen_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="hw_handoff/system_bd.tcl"/>
         <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="hdl/system.hwdef"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="system_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_bram_ctrl_0_0/system_axi_bram_ctrl_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_ds_2/system_auto_ds_2.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xlconstant_0_0/system_xlconstant_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_ds_1/system_auto_ds_1.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="hw_handoff/system_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_0/system_xbar_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_blk_mem_gen_0_0/system_blk_mem_gen_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_regfilex16_v1_0_0_0/system_regfilex16_v1_0_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_quad_spi_0_0/system_axi_quad_spi_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_fit_timer_0_0/system_fit_timer_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_util_ds_buf_0_0/system_util_ds_buf_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_pc_0/system_auto_pc_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_ds_0/system_auto_ds_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_pcie3_0_0/system_axi_pcie3_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_interconnect_0_0/system_axi_interconnect_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_auto_pc_1/system_auto_pc_1.xci"/>
         <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="hw_handoff/system.hwh"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="hdl/system.v"/>
       </File>
       <File Path="$PPRDIR/../source/spi_slave/spi_slave.vhd">
         <FileInfo>
@@ -96,7 +103,6 @@
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="top"/>
-        <Option Name="TopAutoSet" Val="TRUE"/>
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
@@ -115,24 +121,10 @@
       <Filter Type="Srcs"/>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="top"/>
         <Option Name="TopAutoSet" Val="TRUE"/>
         <Option Name="TransportPathDelay" Val="0"/>
         <Option Name="TransportIntDelay" Val="0"/>
         <Option Name="SrcSet" Val="sources_1"/>
-      </Config>
-    </FileSet>
-    <FileSet Name="spi_slave_mem" Type="BlockSrcs" RelSrcDir="$PSRCDIR/spi_slave_mem">
-      <File Path="$PPRDIR/../source/spi_slave/ip/spi_slave_mem.xci">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <Config>
-        <Option Name="TopModule" Val="spi_slave_mem"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
   </FileSets>
@@ -158,45 +150,16 @@
     </Simulator>
   </Simulators>
   <Runs Version="1" Minor="10">
-    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xcku040-ffva1156-2-e" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" Dir="$PRUNDIR/synth_1" IncludeInArchive="true">
+    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xcku040-ffva1156-2-e" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="spi_slave_mem_synth_1" Type="Ft3:Synth" SrcSet="spi_slave_mem" Part="xcku040-ffva1156-2-e" ConstrsSet="spi_slave_mem" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/spi_slave_mem_synth_1" IncludeInArchive="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xcku040-ffva1156-2-e" ConstrsSet="constrs_1" Description="Default settings for Implementation." State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1" IncludeInArchive="true">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xcku040-ffva1156-2-e" ConstrsSet="constrs_1" Description="Default settings for Implementation." State="current" SynthRun="synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="spi_slave_mem_impl_1" Type="Ft2:EntireDesign" Part="xcku040-ffva1156-2-e" ConstrsSet="spi_slave_mem" Description="Default settings for Implementation." SynthRun="spi_slave_mem_synth_1" IncludeInArchive="false">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
