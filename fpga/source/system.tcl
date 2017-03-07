@@ -192,10 +192,6 @@ proc create_root_design { parentCell } {
   set slv_reg13 [ create_bd_port -dir O -from 31 -to 0 slv_reg13 ]
   set slv_reg14 [ create_bd_port -dir O -from 31 -to 0 slv_reg14 ]
   set slv_reg15 [ create_bd_port -dir O -from 31 -to 0 slv_reg15 ]
-  set spi_miso [ create_bd_port -dir I spi_miso ]
-  set spi_mosi [ create_bd_port -dir O spi_mosi ]
-  set spi_sck [ create_bd_port -dir O spi_sck ]
-  set spi_ss [ create_bd_port -dir O -from 0 -to 0 spi_ss ]
 
   # Create instance: axi_bram_ctrl_0, and set properties
   set axi_bram_ctrl_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_bram_ctrl:4.0 axi_bram_ctrl_0 ]
@@ -230,14 +226,6 @@ CONFIG.plltype {QPLL1} \
   set_property -dict [ list \
 CONFIG.axi_aclk_loopback.VALUE_SRC {DEFAULT} \
  ] $axi_pcie3_0
-
-  # Create instance: axi_quad_spi_0, and set properties
-  set axi_quad_spi_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_quad_spi:3.2 axi_quad_spi_0 ]
-  set_property -dict [ list \
-CONFIG.C_NUM_TRANSFER_BITS {8} \
-CONFIG.C_USE_STARTUP {0} \
-CONFIG.C_USE_STARTUP_INT {0} \
- ] $axi_quad_spi_0
 
   # Create instance: blk_mem_gen_0, and set properties
   set blk_mem_gen_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.3 blk_mem_gen_0 ]
@@ -277,19 +265,14 @@ CONFIG.CONST_WIDTH {5} \
   connect_bd_intf_net -intf_net axi_bram_ctrl_0_BRAM_PORTA [get_bd_intf_pins axi_bram_ctrl_0/BRAM_PORTA] [get_bd_intf_pins blk_mem_gen_0/BRAM_PORTA]
   connect_bd_intf_net -intf_net axi_interconnect_0_M00_AXI [get_bd_intf_pins axi_interconnect_0/M00_AXI] [get_bd_intf_pins regfilex16_v1_0_0/s00_axi]
   connect_bd_intf_net -intf_net axi_interconnect_0_M01_AXI [get_bd_intf_pins axi_bram_ctrl_0/S_AXI] [get_bd_intf_pins axi_interconnect_0/M01_AXI]
-  connect_bd_intf_net -intf_net axi_interconnect_0_M02_AXI [get_bd_intf_pins axi_interconnect_0/M02_AXI] [get_bd_intf_pins axi_quad_spi_0/AXI_LITE]
   connect_bd_intf_net -intf_net axi_pcie3_0_M_AXI [get_bd_intf_pins axi_interconnect_0/S00_AXI] [get_bd_intf_pins axi_pcie3_0/M_AXI]
   connect_bd_intf_net -intf_net axi_pcie3_0_pcie_7x_mgt [get_bd_intf_ports pcie_7x_mgt] [get_bd_intf_pins axi_pcie3_0/pcie_7x_mgt]
 
   # Create port connections
-  connect_bd_net -net axi_pcie_0_axi_aclk_out [get_bd_ports axi_clk] [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/M02_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_pcie3_0/axi_aclk] [get_bd_pins axi_pcie3_0/axi_ctl_aclk] [get_bd_pins axi_quad_spi_0/ext_spi_clk] [get_bd_pins axi_quad_spi_0/s_axi_aclk] [get_bd_pins fit_timer_0/Clk] [get_bd_pins regfilex16_v1_0_0/s00_axi_aclk]
-  connect_bd_net -net axi_quad_spi_0_io0_o [get_bd_ports spi_mosi] [get_bd_pins axi_quad_spi_0/io0_o]
-  connect_bd_net -net axi_quad_spi_0_sck_o [get_bd_ports spi_sck] [get_bd_pins axi_quad_spi_0/sck_o]
-  connect_bd_net -net axi_quad_spi_0_ss_o [get_bd_ports spi_ss] [get_bd_pins axi_quad_spi_0/ss_o]
+  connect_bd_net -net axi_pcie_0_axi_aclk_out [get_bd_ports axi_clk] [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/M02_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_pcie3_0/axi_aclk] [get_bd_pins axi_pcie3_0/axi_ctl_aclk] [get_bd_pins fit_timer_0/Clk] [get_bd_pins regfilex16_v1_0_0/s00_axi_aclk]
   connect_bd_net -net fit_timer_0_Interrupt [get_bd_pins axi_pcie3_0/intx_msi_request] [get_bd_pins fit_timer_0/Interrupt]
-  connect_bd_net -net io1_i_1 [get_bd_ports spi_miso] [get_bd_pins axi_quad_spi_0/io1_i]
   connect_bd_net -net pcie_perst_n_1 [get_bd_ports pcie_perst_n] [get_bd_pins axi_pcie3_0/sys_rst_n]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn] [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/M02_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_pcie3_0/axi_aresetn] [get_bd_pins axi_quad_spi_0/s_axi_aresetn] [get_bd_pins fit_timer_0/Rst] [get_bd_pins regfilex16_v1_0_0/s00_axi_aresetn]
+  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn] [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/M02_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_pcie3_0/axi_aresetn] [get_bd_pins fit_timer_0/Rst] [get_bd_pins regfilex16_v1_0_0/s00_axi_aresetn]
   connect_bd_net -net regfilex16_v1_0_0_slv_reg0 [get_bd_ports slv_reg0] [get_bd_pins regfilex16_v1_0_0/slv_reg0]
   connect_bd_net -net regfilex16_v1_0_0_slv_reg1 [get_bd_ports slv_reg1] [get_bd_pins regfilex16_v1_0_0/slv_reg1]
   connect_bd_net -net regfilex16_v1_0_0_slv_reg2 [get_bd_ports slv_reg2] [get_bd_pins regfilex16_v1_0_0/slv_reg2]
@@ -328,20 +311,16 @@ CONFIG.CONST_WIDTH {5} \
 
   # Create address segments
   create_bd_addr_seg -range 0x00001000 -offset 0x00030000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs axi_bram_ctrl_0/S_AXI/Mem0] SEG_axi_bram_ctrl_0_Mem0
-  create_bd_addr_seg -range 0x00010000 -offset 0x00020000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs axi_quad_spi_0/AXI_LITE/Reg] SEG_axi_quad_spi_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x00010000 [get_bd_addr_spaces axi_pcie3_0/M_AXI] [get_bd_addr_segs regfilex16_v1_0_0/s00_axi/reg0] SEG_regfilex16_v1_0_0_reg0
 
   # Perform GUI Layout
   regenerate_bd_layout -layout_string {
    guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
 #  -string -flagsOSRD
-preplace port pcie_perst_n -pg 1 -y 760 -defaultsOSRD
-preplace port spi_sck -pg 1 -y 820 -defaultsOSRD
-preplace port spi_miso -pg 1 -y 620 -defaultsOSRD
-preplace port pcie_refclk -pg 1 -y 900 -defaultsOSRD
-preplace port spi_mosi -pg 1 -y 780 -defaultsOSRD
-preplace port axi_clk -pg 1 -y 630 -defaultsOSRD
-preplace port pcie_7x_mgt -pg 1 -y 710 -defaultsOSRD
+preplace port pcie_perst_n -pg 1 -y 750 -defaultsOSRD
+preplace port pcie_refclk -pg 1 -y 810 -defaultsOSRD
+preplace port axi_clk -pg 1 -y 620 -defaultsOSRD
+preplace port pcie_7x_mgt -pg 1 -y 690 -defaultsOSRD
 preplace portBus slv_read11 -pg 1 -y 290 -defaultsOSRD
 preplace portBus slv_reg8 -pg 1 -y 240 -defaultsOSRD
 preplace portBus slv_read12 -pg 1 -y 310 -defaultsOSRD
@@ -353,7 +332,6 @@ preplace portBus slv_read1 -pg 1 -y 90 -defaultsOSRD
 preplace portBus slv_read15 -pg 1 -y 370 -defaultsOSRD
 preplace portBus slv_read2 -pg 1 -y 110 -defaultsOSRD
 preplace portBus slv_reg0 -pg 1 -y 80 -defaultsOSRD
-preplace portBus spi_ss -pg 1 -y 840 -defaultsOSRD
 preplace portBus slv_read3 -pg 1 -y 130 -defaultsOSRD
 preplace portBus slv_reg1 -pg 1 -y 100 -defaultsOSRD
 preplace portBus slv_read4 -pg 1 -y 150 -defaultsOSRD
@@ -375,53 +353,47 @@ preplace portBus slv_read9 -pg 1 -y 250 -defaultsOSRD
 preplace portBus slv_read10 -pg 1 -y 270 -defaultsOSRD
 preplace portBus slv_reg15 -pg 1 -y 380 -defaultsOSRD
 preplace portBus slv_reg7 -pg 1 -y 220 -defaultsOSRD
-preplace inst xlconstant_0 -pg 1 -lvl 2 -y 840 -defaultsOSRD
-preplace inst fit_timer_0 -pg 1 -lvl 2 -y 700 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 2 -y 830 -defaultsOSRD
+preplace inst fit_timer_0 -pg 1 -lvl 2 -y 690 -defaultsOSRD
 preplace inst regfilex16_v1_0_0 -pg 1 -lvl 5 -y 230 -defaultsOSRD
-preplace inst axi_pcie3_0 -pg 1 -lvl 3 -y 790 -defaultsOSRD
-preplace inst blk_mem_gen_0 -pg 1 -lvl 6 -y 560 -defaultsOSRD
-preplace inst axi_interconnect_0 -pg 1 -lvl 4 -y 540 -defaultsOSRD
-preplace inst axi_bram_ctrl_0 -pg 1 -lvl 5 -y 560 -defaultsOSRD
-preplace inst util_ds_buf_0 -pg 1 -lvl 1 -y 900 -defaultsOSRD
-preplace inst axi_quad_spi_0 -pg 1 -lvl 5 -y 810 -defaultsOSRD
+preplace inst axi_pcie3_0 -pg 1 -lvl 3 -y 780 -defaultsOSRD
+preplace inst blk_mem_gen_0 -pg 1 -lvl 6 -y 550 -defaultsOSRD
+preplace inst axi_interconnect_0 -pg 1 -lvl 4 -y 530 -defaultsOSRD
+preplace inst axi_bram_ctrl_0 -pg 1 -lvl 5 -y 550 -defaultsOSRD
+preplace inst util_ds_buf_0 -pg 1 -lvl 1 -y 810 -defaultsOSRD
 preplace netloc slv_read6_1 1 0 5 NJ 190 NJ 190 NJ 190 NJ 190 NJ
 preplace netloc slv_read5_1 1 0 5 NJ 170 NJ 170 NJ 170 NJ 170 NJ
 preplace netloc slv_read4_1 1 0 5 NJ 150 NJ 150 NJ 150 NJ 150 NJ
 preplace netloc slv_read11_1 1 0 5 NJ 290 NJ 290 NJ 290 NJ 290 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg8 1 5 2 NJ 240 NJ
-preplace netloc io1_i_1 1 0 6 NJ 620 NJ 620 NJ 620 960J 710 NJ 710 1580
 preplace netloc regfilex16_v1_0_0_slv_reg9 1 5 2 NJ 260 NJ
-preplace netloc axi_pcie_0_axi_aclk_out 1 1 6 310 950 540 950 970 950 1280 950 NJ 950 1810J
-preplace netloc axi_quad_spi_0_ss_o 1 5 2 NJ 840 NJ
+preplace netloc axi_pcie_0_axi_aclk_out 1 1 6 320 940 540 940 950 940 1250 940 NJ 940 1750J
 preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 5 1 NJ
 preplace netloc slv_read2_1 1 0 5 NJ 110 NJ 110 NJ 110 NJ 110 NJ
 preplace netloc slv_read15_1 1 0 5 NJ 370 NJ 370 NJ 370 NJ 370 NJ
 preplace netloc CLK_IN_D_1 1 0 1 NJ
-preplace netloc axi_interconnect_0_M02_AXI 1 4 1 1260
 preplace netloc slv_read8_1 1 0 5 NJ 230 NJ 230 NJ 230 NJ 230 NJ
-preplace netloc axi_pcie3_0_M_AXI 1 3 1 950
+preplace netloc axi_pcie3_0_M_AXI 1 3 1 940
 preplace netloc regfilex16_v1_0_0_slv_reg0 1 5 2 NJ 80 NJ
-preplace netloc util_ds_buf_0_IBUF_OUT 1 1 2 N 890 520J
+preplace netloc util_ds_buf_0_IBUF_OUT 1 1 2 310 780 530J
 preplace netloc regfilex16_v1_0_0_slv_reg10 1 5 2 NJ 280 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg1 1 5 2 NJ 100 NJ
-preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 4 300 480 NJ 480 940 340 1270
-preplace netloc fit_timer_0_Interrupt 1 2 1 530
-preplace netloc axi_quad_spi_0_io0_o 1 5 2 NJ 780 NJ
+preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 4 300 470 NJ 470 930 300 1240
+preplace netloc fit_timer_0_Interrupt 1 2 1 550
 preplace netloc xlconstant_0_dout 1 2 1 NJ
 preplace netloc slv_read3_1 1 0 5 NJ 130 NJ 130 NJ 130 NJ 130 NJ
 preplace netloc slv_read10_1 1 0 5 NJ 270 NJ 270 NJ 270 NJ 270 NJ
 preplace netloc slv_read0_1 1 0 5 NJ 70 NJ 70 NJ 70 NJ 70 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg11 1 5 2 NJ 300 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg2 1 5 2 NJ 120 NJ
-preplace netloc axi_quad_spi_0_sck_o 1 5 2 NJ 820 NJ
-preplace netloc axi_pcie3_0_pcie_7x_mgt 1 3 4 NJ 700 NJ 700 NJ 700 1800J
+preplace netloc axi_pcie3_0_pcie_7x_mgt 1 3 4 NJ 690 NJ 690 NJ 690 NJ
 preplace netloc slv_read14_1 1 0 5 NJ 350 NJ 350 NJ 350 NJ 350 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg12 1 5 2 NJ 320 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg3 1 5 2 NJ 140 NJ
-preplace netloc axi_interconnect_0_M00_AXI 1 4 1 1260
+preplace netloc axi_interconnect_0_M00_AXI 1 4 1 1230
 preplace netloc regfilex16_v1_0_0_slv_reg13 1 5 2 NJ 340 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg4 1 5 2 NJ 160 NJ
-preplace netloc pcie_perst_n_1 1 0 3 NJ 760 NJ 760 NJ
+preplace netloc pcie_perst_n_1 1 0 3 NJ 750 NJ 750 NJ
 preplace netloc axi_interconnect_0_M01_AXI 1 4 1 N
 preplace netloc slv_read13_1 1 0 5 NJ 330 NJ 330 NJ 330 NJ 330 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg14 1 5 2 NJ 360 NJ
@@ -429,12 +401,12 @@ preplace netloc regfilex16_v1_0_0_slv_reg5 1 5 2 NJ 180 NJ
 preplace netloc slv_read9_1 1 0 5 NJ 250 NJ 250 NJ 250 NJ 250 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg15 1 5 2 NJ 380 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg6 1 5 2 NJ 200 NJ
-preplace netloc util_ds_buf_0_IBUF_DS_ODIV2 1 1 2 N 910 550J
+preplace netloc util_ds_buf_0_IBUF_DS_ODIV2 1 1 2 300 770 520J
 preplace netloc slv_read7_1 1 0 5 NJ 210 NJ 210 NJ 210 NJ 210 NJ
 preplace netloc slv_read1_1 1 0 5 NJ 90 NJ 90 NJ 90 NJ 90 NJ
 preplace netloc slv_read12_1 1 0 5 NJ 310 NJ 310 NJ 310 NJ 310 NJ
 preplace netloc regfilex16_v1_0_0_slv_reg7 1 5 2 NJ 220 NJ
-levelinfo -pg 1 0 160 420 750 1120 1440 1690 1830 -top 0 -bot 970
+levelinfo -pg 1 0 160 420 740 1090 1390 1640 1770 -top 0 -bot 950
 ",
 }
 

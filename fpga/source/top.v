@@ -67,14 +67,6 @@ module top (
         .slv_reg12(slv_reg[12]),
         .slv_reg13(slv_reg[13]),
         .slv_reg14(slv_reg[14]),
-        .slv_reg15(slv_reg[15]),
-        .spi_miso(spi_miso),
-        .spi_mosi(spi_mosi),
-        .spi_sck(spi_sck),
-        .spi_ss(spi_ss));
-
-    // This is a spi memory that compiles into the fpga for sw development.
-    spi_slave spi_slave_inst(.clk(axi_clk), .sck(spi_sck), .ss_n(spi_ss), .sdi(sdi_mosi), .sdo(sdi_miso));
-
+        .slv_reg15(slv_reg[15]));
 
 endmodule
