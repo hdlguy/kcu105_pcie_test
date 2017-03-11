@@ -1,23 +1,12 @@
 
 `timescale 1 ns / 1 ps
 
-	module axi_regfile_v1_0_S00_AXI #
-	(
-		// Users to add parameters here
-		// User parameters ends
-		// Do not modify the parameters beyond this line
-		// Width of S_AXI data bus
+	module axi_regfile_v1_0_S00_AXI # (
 		parameter integer C_S_AXI_DATA_WIDTH	= 32,
-		// Width of S_AXI address bus
 		parameter integer C_S_AXI_ADDR_WIDTH	= 4
-	)
-	(
-        localparam num_regs = 2**(C_S00_AXI_ADDR_WIDTH-2);
-		// Users to add ports here
-        output logic [num_regs-1:0][C_S00_AXI_DATA_WIDTH-1:0] slv_reg,
-        input  logic [num_regs-1:0][C_S00_AXI_DATA_WIDTH-1:0] slv_read,
-		// User ports ends
-		// Do not modify the ports beyond this line
+	)	(
+        output logic [(2**(C_S00_AXI_ADDR_WIDTH-2))-1:0][C_S00_AXI_DATA_WIDTH-1:0] slv_reg,
+        input  logic [(2**(C_S00_AXI_ADDR_WIDTH-2))-1:0][C_S00_AXI_DATA_WIDTH-1:0] slv_read,
 		input wire  S_AXI_ACLK,
 		input wire  S_AXI_ARESETN,
 		input wire [C_S_AXI_ADDR_WIDTH-1 : 0] S_AXI_AWADDR,
