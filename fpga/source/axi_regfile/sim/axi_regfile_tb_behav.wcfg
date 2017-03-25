@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="axi_regfile_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="axi_regfile_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="5960000001fs"></ZoomEndTime>
+      <Cursor1Time time="0fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="29" />
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_init_axi_txn" type="logic">
+      <obj_property name="ElementShortName">m00_axi_init_axi_txn</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_init_axi_txn</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_error" type="logic">
+      <obj_property name="ElementShortName">m00_axi_error</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_error</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_txn_done" type="logic">
+      <obj_property name="ElementShortName">m00_axi_txn_done</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_txn_done</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_aclk" type="logic">
+      <obj_property name="ElementShortName">m00_axi_aclk</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_aclk</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_aresetn" type="logic">
+      <obj_property name="ElementShortName">m00_axi_aresetn</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_aresetn</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_awaddr" type="array">
+      <obj_property name="ElementShortName">m00_axi_awaddr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_awaddr[31:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_awprot" type="array">
+      <obj_property name="ElementShortName">m00_axi_awprot[2:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_awprot[2:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_awvalid" type="logic">
+      <obj_property name="ElementShortName">m00_axi_awvalid</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_awvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_awready" type="logic">
+      <obj_property name="ElementShortName">m00_axi_awready</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_awready</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_wdata" type="array">
+      <obj_property name="ElementShortName">m00_axi_wdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_wdata[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_wstrb" type="array">
+      <obj_property name="ElementShortName">m00_axi_wstrb[3:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_wstrb[3:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_wvalid" type="logic">
+      <obj_property name="ElementShortName">m00_axi_wvalid</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_wvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_wready" type="logic">
+      <obj_property name="ElementShortName">m00_axi_wready</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_wready</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_bresp" type="array">
+      <obj_property name="ElementShortName">m00_axi_bresp[1:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_bresp[1:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_bvalid" type="logic">
+      <obj_property name="ElementShortName">m00_axi_bvalid</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_bvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_bready" type="logic">
+      <obj_property name="ElementShortName">m00_axi_bready</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_bready</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_araddr" type="array">
+      <obj_property name="ElementShortName">m00_axi_araddr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_araddr[31:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_arprot" type="array">
+      <obj_property name="ElementShortName">m00_axi_arprot[2:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_arprot[2:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_arvalid" type="logic">
+      <obj_property name="ElementShortName">m00_axi_arvalid</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_arvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_arready" type="logic">
+      <obj_property name="ElementShortName">m00_axi_arready</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_arready</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_rdata" type="array">
+      <obj_property name="ElementShortName">m00_axi_rdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_rdata[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_rresp" type="array">
+      <obj_property name="ElementShortName">m00_axi_rresp[1:0]</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_rresp[1:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_rvalid" type="logic">
+      <obj_property name="ElementShortName">m00_axi_rvalid</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_rvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/m00_axi_rready" type="logic">
+      <obj_property name="ElementShortName">m00_axi_rready</obj_property>
+      <obj_property name="ObjectShortName">m00_axi_rready</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/slv_reg" type="array">
+      <obj_property name="ElementShortName">slv_reg[7:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">slv_reg[7:0][31:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/slv_read" type="array">
+      <obj_property name="ElementShortName">slv_read[7:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">slv_read[7:0][31:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/C_M00_AXI_ADDR_WIDTH" type="array">
+      <obj_property name="ElementShortName">C_M00_AXI_ADDR_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">C_M00_AXI_ADDR_WIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/axi_regfile_tb/C_M00_AXI_DATA_WIDTH" type="array">
+      <obj_property name="ElementShortName">C_M00_AXI_DATA_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">C_M00_AXI_DATA_WIDTH[31:0]</obj_property>
+   </wvobject>
+</wave_config>
