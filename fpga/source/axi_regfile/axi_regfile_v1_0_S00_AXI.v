@@ -1,22 +1,3 @@
-//============================================================================
-//
-// This document contains information that is the proprietary property of SEAKR 
-// Engineering Inc. and third parties to whom SEAKR owes an obligation of 
-// confidential handling.  The information contained herein shall not be 
-// published, disclosed to others duplicated in whole or in part or used for 
-// any purpose other than the intended purpose.
-//
-// This document contains technical data whose export is restricted by the Arms 
-// Export Control Act (Title 22, U.S.C. Sec 2751, et seq.) or the Export 
-// Administration Act of 1979, as amended (Title 50, U.S.C., app.  2401 et seq.).
-// This information may not be exported, released or disclosed to foreign 
-// persons whether here in the United States or abroad without first obtaining 
-// the proper export authority. Recipient shall include this notice with any 
-// portion of this document that is authorized to be reproduced.
-//
-// Copyright © 2016 SEAKR Engineering, Inc.
-//
-//============================================================================
 	// This module is customized to provide a register array of parameterized depth.
     // system verilog arrays are used for both the register outputs and readback ports.
     // It has been tested at 4 registers and 256 registers.
@@ -27,9 +8,6 @@
         // register file i/o
 	    output logic  [2**(C_S_AXI_ADDR_WIDTH-2)-1:0][C_S_AXI_DATA_WIDTH-1:0]	slv_reg,
 	    input  logic  [2**(C_S_AXI_ADDR_WIDTH-2)-1:0][C_S_AXI_DATA_WIDTH-1:0]	slv_read,
-	    //output logic  [3:0][C_S_AXI_DATA_WIDTH-1:0]	slv_reg,
-	    //input  logic  [3:0][C_S_AXI_DATA_WIDTH-1:0]	slv_read,
-
 		// axi port
 		input wire  S_AXI_ACLK,
 		input wire  S_AXI_ARESETN,

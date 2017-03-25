@@ -10,15 +10,8 @@ module top (
     output logic [7:0] led
 );
 
-    logic [31:0] slv_read[16];
-    logic [31:0] slv_reg[16];
-    //
-    logic axi_clk;
-    //
-    logic spi_miso;
-    logic spi_mosi;
-    logic spi_sck;
-    logic [0:0] spi_ss;
+    logic [15:0][31:0] slv_read;
+    logic [15:0][31:0] slv_reg;
 
     // for now wrap the regs back to the read ports.
     assign slv_read[0] = 32'hDEADBEEF;
@@ -26,47 +19,91 @@ module top (
     assign slv_read[15:2] = slv_reg[15:2];
     assign led = slv_reg[7][7:0];
 
+    logic [31:0]M00_AXI_araddr;
+    logic [2:0]M00_AXI_arprot;
+    logic M00_AXI_arready;
+    logic M00_AXI_arvalid;
+    logic [31:0]M00_AXI_awaddr;
+    logic [2:0]M00_AXI_awprot;
+    logic M00_AXI_awready;
+    logic M00_AXI_awvalid;
+    logic M00_AXI_bready;
+    logic [1:0]M00_AXI_bresp;
+    logic M00_AXI_bvalid;
+    logic [31:0]M00_AXI_rdata;
+    logic M00_AXI_rready;
+    logic [1:0]M00_AXI_rresp;
+    logic M00_AXI_rvalid;
+    logic [31:0]M00_AXI_wdata;
+    logic M00_AXI_wready;
+    logic [3:0]M00_AXI_wstrb;
+    logic M00_AXI_wvalid;
+    logic axi_clk;
+  
+    // this is the IPI block diagram design.
     system system_i (
+        .M00_AXI_araddr(M00_AXI_araddr),
+        .M00_AXI_arprot(M00_AXI_arprot),
+        .M00_AXI_arready(M00_AXI_arready),
+        .M00_AXI_arvalid(M00_AXI_arvalid),
+        .M00_AXI_awaddr(M00_AXI_awaddr),
+        .M00_AXI_awprot(M00_AXI_awprot),
+        .M00_AXI_awready(M00_AXI_awready),
+        .M00_AXI_awvalid(M00_AXI_awvalid),
+        .M00_AXI_bready(M00_AXI_bready),
+        .M00_AXI_bresp(M00_AXI_bresp),
+        .M00_AXI_bvalid(M00_AXI_bvalid),
+        .M00_AXI_rdata(M00_AXI_rdata),
+        .M00_AXI_rready(M00_AXI_rready),
+        .M00_AXI_rresp(M00_AXI_rresp),
+        .M00_AXI_rvalid(M00_AXI_rvalid),
+        .M00_AXI_wdata(M00_AXI_wdata),
+        .M00_AXI_wready(M00_AXI_wready),
+        .M00_AXI_wstrb(M00_AXI_wstrb),
+        .M00_AXI_wvalid(M00_AXI_wvalid),
+        .axi_clk(axi_clk),
+         //
         .pcie_7x_mgt_rxn(pcie_7x_mgt_rxn),
         .pcie_7x_mgt_rxp(pcie_7x_mgt_rxp),
         .pcie_7x_mgt_txn(pcie_7x_mgt_txn),
         .pcie_7x_mgt_txp(pcie_7x_mgt_txp),
         .pcie_refclk_clk_n(pcie_refclk_n),
         .pcie_refclk_clk_p(pcie_refclk_p),
-        .pcie_perst_n(pcie_perst_n),
-        .axi_clk(axi_clk),
-        //
-        .slv_read0(slv_read[0]),
-        .slv_read1(slv_read[1]),
-        .slv_read2(slv_read[2]),
-        .slv_read3(slv_read[3]),
-        .slv_read4(slv_read[4]),
-        .slv_read5(slv_read[5]),
-        .slv_read6(slv_read[6]),
-        .slv_read7(slv_read[7]),
-        .slv_read8(slv_read[8]),
-        .slv_read9(slv_read[9]),
-        .slv_read10(slv_read[10]),
-        .slv_read11(slv_read[11]),
-        .slv_read12(slv_read[12]),
-        .slv_read13(slv_read[13]),
-        .slv_read14(slv_read[14]),
-        .slv_read15(slv_read[15]),
-        .slv_reg0(slv_reg[0]),
-        .slv_reg1(slv_reg[1]),
-        .slv_reg2(slv_reg[2]),
-        .slv_reg3(slv_reg[3]),
-        .slv_reg4(slv_reg[4]),
-        .slv_reg5(slv_reg[5]),
-        .slv_reg6(slv_reg[6]),
-        .slv_reg7(slv_reg[7]),
-        .slv_reg8(slv_reg[8]),
-        .slv_reg9(slv_reg[9]),
-        .slv_reg10(slv_reg[10]),
-        .slv_reg11(slv_reg[11]),
-        .slv_reg12(slv_reg[12]),
-        .slv_reg13(slv_reg[13]),
-        .slv_reg14(slv_reg[14]),
-        .slv_reg15(slv_reg[15]));
+        .pcie_perst_n(pcie_perst_n)
+    );
+
+    // This is the axi register file.
+    axi_regfile_v1_0_S00_AXI #(
+        .C_S_AXI_DATA_WIDTH(32),
+        .C_S_AXI_ADDR_WIDTH(5))
+    axi_regfile (
+        // registers out
+        .slv_reg(slv_reg),
+        // read ports in
+        .slv_read(slv_read),
+        // axi interface
+		.S_AXI_ACLK    (axi_clk),
+		.S_AXI_ARESETN (M00_AXI_aresetn),
+		.S_AXI_AWADDR  (M00_AXI_awaddr),
+		.S_AXI_AWPROT  (M00_AXI_awprot),
+		.S_AXI_AWVALID (M00_AXI_awvalid),
+		.S_AXI_AWREADY (M00_AXI_awready),
+		.S_AXI_WDATA   (M00_AXI_wdata),
+		.S_AXI_WSTRB   (M00_AXI_wstrb),
+		.S_AXI_WVALID  (M00_AXI_wvalid),
+		.S_AXI_WREADY  (M00_AXI_wready),
+		.S_AXI_BRESP   (M00_AXI_bresp),
+		.S_AXI_BVALID  (M00_AXI_bvalid),
+		.S_AXI_BREADY  (M00_AXI_bready),
+		.S_AXI_ARADDR  (M00_AXI_araddr),
+		.S_AXI_ARPROT  (M00_AXI_arprot),
+		.S_AXI_ARVALID (M00_AXI_arvalid),
+		.S_AXI_ARREADY (M00_AXI_arready),
+		.S_AXI_RDATA   (M00_AXI_rdata),
+		.S_AXI_RRESP   (M00_AXI_rresp),
+		.S_AXI_RVALID  (M00_AXI_rvalid),
+		.S_AXI_RREADY  (M00_AXI_rready)
+    );
 
 endmodule
+

@@ -24,7 +24,7 @@ update_ip_catalog
 update_ip_catalog -add_ip ../source/regfilex16/user.org_user_regfilex16_v1_0_1.0.zip -repo_path ./ip
 
 # read in ip cores
-read_ip ../source/spi_slave/ip/spi_slave_mem.xci
+#read_ip ../source/spi_slave/ip/spi_slave_mem.xci
 upgrade_ip -quiet [get_ips *]
 generate_target {all} [get_ips *]
 
@@ -34,7 +34,7 @@ generate_target {synthesis implementation} [get_files ./proj.srcs/sources_1/bd/s
 set_property synth_checkpoint_mode None [get_files ./proj.srcs/sources_1/bd/system/system.bd]
 
 # Read in the hdl source.
-read_vhdl        [glob ../source/spi_slave/spi_slave.vhd]
+read_verilog -sv [glob ../source/axi_regfile/axi_regfile_v1_0_S00_AXI.v]
 read_verilog -sv [glob ../source/top.v]
 
 read_xdc ../source/top.xdc
